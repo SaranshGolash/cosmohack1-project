@@ -1,21 +1,34 @@
-<%- include('partials/header', { title: 'Dark Web Monitor - SecureGuard' }) %>
+<%- include('partials/header', { title: 'Dark Web Monitor - CredLocker' }) %>
 <%- include('partials/sidebar', { page: 'darkweb-monitor' }) %>
 
 <div class="main-content">
   <div class="container">
     <div class="fade-in-left">
-      <h1><span style="-webkit-text-fill-color: initial; background: none;">🕵️</span> <span class="text-gradient-purple">Dark Web & Leak Monitor</span></h1>
-      <p style="color: #64748b; margin-top: 0.5rem">
+      <h1>
+        <span style="-webkit-text-fill-color: initial; background: none"
+          >🕵️</span
+        >
+        <span
+          style="
+            background: linear-gradient(135deg, #f43f5e, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          "
+          >Dark Web & Leak Monitor</span
+        >
+      </h1>
+      <p style="color: #94a3b8; margin-top: 0.5rem">
         Search the deep web for compromised credentials, emails, and phone
         numbers.
       </p>
     </div>
 
-    <!-- 1. SEARCH CARD -->
-    <div class="glass-card card-purple fade-in-up" style="margin-top: 2rem">
+    <div
+      class="glass-card fade-in-up"
+      style="margin-top: 2rem; border-left: 4px solid #f43f5e"
+    >
       <div id="searchContainer">
         <div style="display: flex; gap: 1rem; flex-wrap: wrap">
-          <!-- Type Selector -->
           <div class="form-group" style="flex: 1; min-width: 150px">
             <label class="form-label">Search Type</label>
             <select
@@ -29,7 +42,6 @@
             </select>
           </div>
 
-          <!-- Input Field -->
           <div class="form-group" style="flex: 3; min-width: 250px">
             <label class="form-label" for="searchInput">Search Data</label>
             <input
@@ -45,7 +57,10 @@
         <button
           id="scanBtn"
           class="btn btn-primary"
-          style="background: #8b5cf6; border-color: #7c3aed"
+          style="
+            background: linear-gradient(135deg, #f43f5e, #d946ef);
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4);
+          "
           onclick="initiateDarkWebScan()"
         >
           Start Dark Web Scan
@@ -53,7 +68,6 @@
       </div>
     </div>
 
-    <!-- 2. ERROR BOX -->
     <div
       id="errorBox"
       style="
@@ -61,16 +75,14 @@
         margin-top: 1rem;
         padding: 1rem;
         border-radius: 8px;
-        background: rgba(239, 68, 68, 0.2);
+        background: rgba(239, 68, 68, 0.1);
         border: 1px solid #ef4444;
         color: #fca5a5;
         text-align: center;
       "
     ></div>
 
-    <!-- 3. RESULTS AREA -->
     <div id="visualResults" style="display: none; margin-top: 2rem">
-      <!-- A. STATUS HEADER -->
       <div
         class="glass-card"
         id="statusCard"
@@ -81,7 +93,14 @@
           border-left: 6px solid #10b981;
         "
       >
-        <div id="statusIcon" style="font-size: 4rem; margin-bottom: 1rem">
+        <div
+          id="statusIcon"
+          style="
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+          "
+        >
           ✅
         </div>
         <h2
@@ -107,13 +126,13 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
           "
         >
           Databases Scanned: <strong>250+</strong>
         </div>
       </div>
 
-      <!-- B. BREACH LIST (Hidden if safe) -->
       <div id="breachContainer" style="display: none">
         <h3
           style="
@@ -126,7 +145,7 @@
         >
           <span
             style="
-              background: #7f1d1d;
+              background: rgba(185, 28, 28, 0.5);
               width: 30px;
               height: 30px;
               display: flex;
@@ -134,18 +153,17 @@
               justify-content: center;
               border-radius: 50%;
               font-size: 1.2rem;
+              border: 1px solid #f87171;
             "
             >!</span
           >
           Exposed Records Found
         </h3>
 
-        <!-- Breach Timeline Grid -->
         <div
           id="breachGrid"
           style="display: grid; gap: 1.5rem; position: relative"
         >
-          <!-- Dotted Line for Timeline Effect -->
           <div
             style="
               position: absolute;
@@ -153,11 +171,10 @@
               top: 20px;
               bottom: 20px;
               width: 2px;
-              background: rgba(255, 255, 255, 0.1);
+              background: linear-gradient(to bottom, #f43f5e, transparent);
               z-index: 0;
             "
           ></div>
-          <!-- Cards Injected Here -->
         </div>
       </div>
     </div>
@@ -201,14 +218,13 @@
     errorBox.style.display = "none";
     breachContainer.style.display = "none";
     breachGrid.innerHTML =
-      '<div style="position: absolute; left: 19px; top: 20px; bottom: 20px; width: 2px; background: rgba(255,255,255,0.1); z-index: 0;"></div>'; // Reset with timeline line
+      '<div style="position: absolute; left: 19px; top: 20px; bottom: 20px; width: 2px; background: linear-gradient(to bottom, #f43f5e, transparent); z-index: 0;"></div>';
 
     scanBtn.innerText = "Searching Underground Markets...";
     scanBtn.disabled = true;
 
     try {
       console.log(`👉 Requesting: ${searchType} -> ${searchInput}`);
-
       const response = await fetch("/api/darkweb-monitor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -224,7 +240,7 @@
       const data = await response.json();
       console.log("👉 API Data:", data);
 
-      // --- DEMO MODE OVERRIDES (For Visual Verification) ---
+      // --- DEMO MODE OVERRIDES ---
       if (searchInput === "leaked@test.com") {
         data.leaked = true;
         data.records_count = 3;
@@ -269,7 +285,7 @@
         ];
         data.success = true;
       }
-      // -----------------------------------------------------
+      // ----------------------------
 
       if (data.success === false) {
         throw new Error(data.error || "Search failed");
@@ -288,9 +304,8 @@
         statusTitle.innerText = `DATA COMPROMISED (${data.records_count} Records)`;
         statusDesc.innerText =
           "This data was found in public or private data breaches.";
-
-        statusTitle.style.color = "#ef4444"; // Red
-        statusCard.style.borderLeftColor = "#ef4444";
+        statusTitle.style.color = "#f43f5e"; // Neon Red
+        statusCard.style.borderLeftColor = "#f43f5e";
 
         // Render Breaches
         breachContainer.style.display = "block";
@@ -305,10 +320,10 @@
             // Add timeline dot
             const dot = document.createElement("div");
             dot.style.cssText =
-              "position: absolute; left: -29px; top: 20px; width: 16px; height: 16px; background: #f59e0b; border-radius: 50%; border: 3px solid #0f172a; z-index: 1;";
+              "position: absolute; left: -29px; top: 20px; width: 16px; height: 16px; background: #f59e0b; border-radius: 50%; border: 4px solid var(--dark-slate); z-index: 1; box-shadow: 0 0 10px #f59e0b;";
             card.appendChild(dot);
 
-            // Construct HTML for each breach
+            // Construct HTML
             card.innerHTML += `
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
                             <div>
@@ -325,35 +340,30 @@
                                 </span>
                             </div>
                         </div>
-                        
                         ${
                           breach.password
                             ? `
-                        <div style="margin-top: 1rem; background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 6px; border: 1px dashed rgba(239, 68, 68, 0.5);">
-                            <div style="color: #ef4444; font-size: 0.75rem; font-weight: bold; margin-bottom: 0.25rem; letter-spacing: 1px;">EXPOSED PASSWORD</div>
-                            <code style="color: #fca5a5; font-family: monospace; font-size: 1rem;">${breach.password}</code>
-                        </div>
-                        `
+                        <div style="margin-top: 1rem; background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 6px; border: 1px dashed rgba(244, 63, 94, 0.5);">
+                            <div style="color: #f43f5e; font-size: 0.75rem; font-weight: bold; margin-bottom: 0.25rem; letter-spacing: 1px;">EXPOSED PASSWORD</div>
+                            <code style="color: #fda4af; font-family: 'JetBrains Mono', monospace; font-size: 1rem;">${breach.password}</code>
+                        </div>`
                             : ""
                         }
-                        
                         ${
                           breach.pass_salt
                             ? `
                         <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">
-                            <strong>Salt/Hash:</strong> <span style="font-family: monospace;">${breach.pass_salt.substring(
+                            <strong>Salt/Hash:</strong> <span style="font-family: 'JetBrains Mono', monospace;">${breach.pass_salt.substring(
                               0,
                               15
                             )}...</span>
-                        </div>
-                        `
+                        </div>`
                             : ""
                         }
                     `;
             breachGrid.appendChild(card);
           });
         } else {
-          // Fallback if leaked=true but results array is empty
           breachGrid.innerHTML = `<div style="color:#94a3b8; margin-left: 40px;">No specific breach details available via public API.</div>`;
         }
       } else {
@@ -362,7 +372,6 @@
         statusTitle.innerText = "NO LEAKS FOUND";
         statusDesc.innerText =
           "Your data does not appear in our monitored databases.";
-
         statusTitle.style.color = "#10b981"; // Green
         statusCard.style.borderLeftColor = "#10b981";
       }

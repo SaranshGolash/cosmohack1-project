@@ -1,7 +1,6 @@
-<%- include('partials/header', { title: 'Security Analytics - SecureGuard' }) %>
+<%- include('partials/header', { title: 'Security Analytics - CredLocker' }) %>
 <%- include('partials/sidebar', { page: 'analytics' }) %>
 
-<!-- External Libs -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -18,10 +17,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
   .metric-value {
     font-size: 2.5rem;
     font-weight: 800;
+    font-family: "JetBrains Mono", monospace;
     background: linear-gradient(to right, #fff, #94a3b8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -37,27 +38,30 @@
       font-size: 2rem;
     }
   }
-  @media (max-width: 480px) {
-    .chart-container {
-      height: 200px;
-    }
-    .metric-value {
-      font-size: 1.75rem;
-    }
-  }
 </style>
 
 <div class="main-content">
   <div class="container">
-    <!-- Header Section -->
     <div class="fade-in-left" data-aos="fade-right" data-aos-duration="1000">
-      <h1><span style="-webkit-text-fill-color: initial; background: none;">📈</span> <span class="text-gradient-purple">Security Analytics</span></h1>
-      <p style="color: #64748b; margin-top: 0.5rem">
+      <h1>
+        <span style="-webkit-text-fill-color: initial; background: none"
+          >📈</span
+        >
+        <span
+          class="text-gradient-purple"
+          style="
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          "
+          >Security Analytics</span
+        >
+      </h1>
+      <p style="color: #94a3b8; margin-top: 0.5rem">
         Real-time visualization of threat intelligence and system health.
       </p>
     </div>
 
-    <!-- Top KPI Cards -->
     <div
       style="
         display: grid;
@@ -70,8 +74,16 @@
         class="glass-card chart-card"
         data-aos="flip-up"
         data-aos-delay="100"
+        style="border-left: 4px solid #a78bfa"
       >
-        <div style="color: #a78bfa; font-size: 0.9rem; font-weight: 600">
+        <div
+          style="
+            color: #a78bfa;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+          "
+        >
           TOTAL SCANS
         </div>
         <div class="metric-value">12,450</div>
@@ -82,8 +94,16 @@
         class="glass-card chart-card"
         data-aos="flip-up"
         data-aos-delay="200"
+        style="border-left: 4px solid #f87171"
       >
-        <div style="color: #f87171; font-size: 0.9rem; font-weight: 600">
+        <div
+          style="
+            color: #f87171;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+          "
+        >
           THREATS BLOCKED
         </div>
         <div
@@ -102,8 +122,16 @@
         class="glass-card chart-card"
         data-aos="flip-up"
         data-aos-delay="300"
+        style="border-left: 4px solid #38bdf8"
       >
-        <div style="color: #38bdf8; font-size: 0.9rem; font-weight: 600">
+        <div
+          style="
+            color: #38bdf8;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+          "
+        >
           API LATENCY
         </div>
         <div
@@ -124,8 +152,16 @@
         class="glass-card chart-card"
         data-aos="flip-up"
         data-aos-delay="400"
+        style="border-left: 4px solid #fbbf24"
       >
-        <div style="color: #fbbf24; font-size: 0.9rem; font-weight: 600">
+        <div
+          style="
+            color: #fbbf24;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+          "
+        >
           ACTIVE MONITORS
         </div>
         <div
@@ -141,7 +177,6 @@
       </div>
     </div>
 
-    <!-- Charts Row 1: Line & Bar -->
     <div
       style="
         display: grid;
@@ -150,7 +185,6 @@
         margin-top: 2rem;
       "
     >
-      <!-- Line Chart -->
       <div class="glass-card" data-aos="fade-up" data-aos-duration="1000">
         <h3 style="color: #fff; margin-bottom: 1rem">
           Threat Traffic Overview
@@ -160,7 +194,6 @@
         </div>
       </div>
 
-      <!-- Bar Chart -->
       <div class="glass-card" data-aos="fade-up" data-aos-duration="1200">
         <h3 style="color: #fff; margin-bottom: 1rem">Attacks by Category</h3>
         <div class="chart-container">
@@ -169,7 +202,6 @@
       </div>
     </div>
 
-    <!-- Charts Row 2: Radar, Doughnut, Polar -->
     <div
       style="
         display: grid;
@@ -178,7 +210,6 @@
         margin-top: 2rem;
       "
     >
-      <!-- Radar Chart -->
       <div class="glass-card" data-aos="zoom-in" data-aos-duration="1000">
         <h3 style="color: #fff; margin-bottom: 1rem; text-align: center">
           Vulnerability Assessment
@@ -188,7 +219,6 @@
         </div>
       </div>
 
-      <!-- Doughnut Chart -->
       <div class="glass-card" data-aos="zoom-in" data-aos-duration="1200">
         <h3 style="color: #fff; margin-bottom: 1rem; text-align: center">
           Risk Distribution
@@ -198,7 +228,6 @@
         </div>
       </div>
 
-      <!-- Polar Area Chart -->
       <div class="glass-card" data-aos="zoom-in" data-aos-duration="1400">
         <h3 style="color: #fff; margin-bottom: 1rem; text-align: center">
           Attack Origins
@@ -209,7 +238,6 @@
       </div>
     </div>
 
-    <!-- Charts Row 3: Bubble (Advanced) -->
     <div
       class="glass-card"
       style="margin-top: 2rem; margin-bottom: 2rem"
@@ -227,29 +255,23 @@
 </div>
 
 <script>
-  // --- 1. INITIALIZE AOS (ANIMATE ON SCROLL) ---
   AOS.init({
-    once: false, // Animation happens every time you scroll down/up
-    mirror: true, // Elements animate out while scrolling past them
-    offset: 100, // Offset (in px) from the original trigger point
+    once: false,
+    mirror: true,
+    offset: 100,
     easing: "ease-in-out-cubic",
   });
 
-  // --- 2. CHART CONFIGURATIONS ---
-
-  // Global Defaults for Modern Look
+  // Global Defaults
   Chart.defaults.color = "#94a3b8";
-  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.font.family = "'Outfit', sans-serif";
   Chart.defaults.scale.grid.color = "rgba(255, 255, 255, 0.05)";
 
-  // A. Line Chart (Traffic)
+  // A. Line Chart
   const ctxTraffic = document.getElementById("trafficChart").getContext("2d");
-
-  // Gradient Fill
   const gradientTraffic = ctxTraffic.createLinearGradient(0, 0, 0, 400);
-  gradientTraffic.addColorStop(0, "rgba(139, 92, 246, 0.5)"); // Purple
+  gradientTraffic.addColorStop(0, "rgba(139, 92, 246, 0.5)");
   gradientTraffic.addColorStop(1, "rgba(139, 92, 246, 0.0)");
-
   new Chart(ctxTraffic, {
     type: "line",
     data: {
@@ -261,7 +283,7 @@
           fill: true,
           backgroundColor: gradientTraffic,
           borderColor: "#8b5cf6",
-          tension: 0.4, // Smooth curves
+          tension: 0.4,
           borderWidth: 2,
           pointBackgroundColor: "#fff",
           pointBorderColor: "#8b5cf6",
@@ -272,16 +294,12 @@
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-      },
-      scales: {
-        y: { beginAtZero: true },
-      },
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } },
     },
   });
 
-  // B. Bar Chart (Categories)
+  // B. Bar Chart
   const ctxCategory = document.getElementById("categoryChart").getContext("2d");
   new Chart(ctxCategory, {
     type: "bar",
@@ -292,11 +310,11 @@
           label: "Incidents",
           data: [120, 190, 30, 50, 20],
           backgroundColor: [
-            "rgba(248, 113, 113, 0.7)", // Red
-            "rgba(251, 191, 36, 0.7)", // Amber
-            "rgba(56, 189, 248, 0.7)", // Blue
-            "rgba(167, 139, 250, 0.7)", // Purple
-            "rgba(52, 211, 153, 0.7)", // Green
+            "rgba(244, 63, 94, 0.8)", // Pink
+            "rgba(139, 92, 246, 0.8)", // Violet
+            "rgba(6, 182, 212, 0.8)", // Cyan
+            "rgba(59, 130, 246, 0.8)", // Blue
+            "rgba(16, 185, 129, 0.8)", // Green
           ],
           borderRadius: 6,
           borderSkipped: false,
@@ -310,7 +328,7 @@
     },
   });
 
-  // C. Radar Chart (Vulnerability)
+  // C. Radar Chart
   new Chart(document.getElementById("radarChart"), {
     type: "radar",
     data: {
@@ -320,12 +338,12 @@
           label: "Current Posture",
           data: [85, 70, 90, 60, 80],
           fill: true,
-          backgroundColor: "rgba(16, 185, 129, 0.2)",
-          borderColor: "#10b981",
-          pointBackgroundColor: "#10b981",
+          backgroundColor: "rgba(139, 92, 246, 0.2)",
+          borderColor: "#8b5cf6",
+          pointBackgroundColor: "#8b5cf6",
           pointBorderColor: "#fff",
           pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "#10b981",
+          pointHoverBorderColor: "#8b5cf6",
         },
       ],
     },
@@ -337,14 +355,14 @@
           angleLines: { color: "rgba(255, 255, 255, 0.1)" },
           grid: { color: "rgba(255, 255, 255, 0.1)" },
           pointLabels: { color: "#cbd5e1", font: { size: 12 } },
-          ticks: { backdropColor: "transparent", color: "transparent" }, // Hide tick numbers
+          ticks: { backdropColor: "transparent", color: "transparent" },
         },
       },
       plugins: { legend: { display: false } },
     },
   });
 
-  // D. Doughnut Chart (Risk)
+  // D. Doughnut Chart
   new Chart(document.getElementById("doughnutChart"), {
     type: "doughnut",
     data: {
@@ -352,11 +370,7 @@
       datasets: [
         {
           data: [300, 50, 100],
-          backgroundColor: [
-            "#10b981", // Emerald
-            "#fbbf24", // Amber
-            "#ef4444", // Red
-          ],
+          backgroundColor: ["#10b981", "#fbbf24", "#ef4444"],
           borderWidth: 0,
           hoverOffset: 10,
         },
@@ -375,7 +389,7 @@
     },
   });
 
-  // E. Polar Area (Attack Origins)
+  // E. Polar Area
   new Chart(document.getElementById("polarChart"), {
     type: "polarArea",
     data: {
@@ -397,14 +411,14 @@
             "rgba(239, 68, 68, 0.5)",
             "rgba(245, 158, 11, 0.5)",
             "rgba(16, 185, 129, 0.5)",
-            "rgba(236, 72, 153, 0.5)", // Pink for India
+            "rgba(236, 72, 153, 0.5)",
             "rgba(59, 130, 246, 0.5)",
             "rgba(139, 92, 246, 0.5)",
-            "rgba(20, 184, 166, 0.5)", // Teal for France
-            "rgba(99, 102, 241, 0.5)", // Indigo for Germany
+            "rgba(6, 182, 212, 0.5)",
+            "rgba(99, 102, 241, 0.5)",
           ],
           borderWidth: 1,
-          borderColor: "#1e293b", // Match dark bg
+          borderColor: "#0b0f19",
         },
       ],
     },
@@ -421,7 +435,7 @@
     },
   });
 
-  // F. Bubble Chart (Anomaly)
+  // F. Bubble Chart
   new Chart(document.getElementById("bubbleChart"), {
     type: "bubble",
     data: {
@@ -431,14 +445,14 @@
           data: [
             { x: 20, y: 30, r: 15 },
             { x: 40, y: 10, r: 10 },
-            { x: 25, y: 60, r: 25 }, // Big anomaly
+            { x: 25, y: 60, r: 25 },
             { x: 35, y: 40, r: 5 },
             { x: 50, y: 50, r: 12 },
             { x: 10, y: 20, r: 8 },
-            { x: 45, y: 80, r: 20 }, // High severity
+            { x: 45, y: 80, r: 20 },
           ],
-          backgroundColor: "rgba(236, 72, 153, 0.6)", // Pink
-          borderColor: "rgba(236, 72, 153, 1)",
+          backgroundColor: "#8b5cf6",
+          borderColor: "#fff",
         },
       ],
     },
