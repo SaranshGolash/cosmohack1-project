@@ -1,4 +1,4 @@
-<%- include('partials/header', { title: 'Gamified Learning - CredLocker' }) %>
+<%- include('partials/header', { title: 'Gamified Learning - SecureGuard' }) %>
 <%- include('partials/sidebar', { page: 'gamification' }) %>
 
 <div class="main-content">
@@ -26,12 +26,7 @@
     >
       <h3>Your Progress</h3>
       <div
-        style="
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          margin-top: 1rem;
-        "
+        style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem"
       >
         <span style="font-size: 2.5rem">⭐</span>
         <div>
@@ -90,35 +85,57 @@
   <div class="modal-content glass-card">
     <span class="close-button">&times;</span>
     <h3 id="modalTaskTitle"></h3>
-    <p id="modalTaskDescription" style="color: #94a3b8; margin-bottom: 1rem;"></p>
-    
+    <p
+      id="modalTaskDescription"
+      style="color: #94a3b8; margin-bottom: 1rem"
+    ></p>
+
     <div class="modal-section">
       <h4>Documentation</h4>
       <p id="modalTaskDocumentation"></p>
     </div>
 
-    <div class="modal-section" id="modalVideoSection" style="display: none;">
+    <div class="modal-section" id="modalVideoSection" style="display: none">
       <h4>Video Explanation</h4>
       <div class="video-container">
         <iframe id="modalTaskVideo" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
-    <div class="modal-section" id="modalImageSection" style="display: none;">
+    <div class="modal-section" id="modalImageSection" style="display: none">
       <h4>Infographic / Image</h4>
-      <img id="modalTaskImage" src="" alt="Task Image" style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 0.5rem;">
+      <img
+        id="modalTaskImage"
+        src=""
+        alt="Task Image"
+        style="
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin-top: 0.5rem;
+        "
+      />
     </div>
 
     <div class="modal-section" id="modalMiniTaskSection">
       <h4>Mini-Task</h4>
-      <p id="modalMiniTaskDescription" style="font-style: italic; color: var(--light-gold);"></p>
-      <button id="miniTaskCompleteBtn" class="btn btn-secondary" style="margin-top: 1rem;">Mark as Understood</button>
+      <p
+        id="modalMiniTaskDescription"
+        style="font-style: italic; color: var(--light-gold)"
+      ></p>
+      <button
+        id="miniTaskCompleteBtn"
+        class="btn btn-secondary"
+        style="margin-top: 1rem"
+      >
+        Mark as Understood
+      </button>
     </div>
 
-    <button 
-      id="modalCompleteTaskBtn" 
-      class="btn btn-primary" 
-      style="margin-top: 2rem; width: 100%;"
+    <button
+      id="modalCompleteTaskBtn"
+      class="btn btn-primary"
+      style="margin-top: 2rem; width: 100%"
       disabled
     >
       Complete Task
@@ -138,13 +155,17 @@
   const closeButton = document.querySelector(".close-button");
   const modalTaskTitle = document.getElementById("modalTaskTitle");
   const modalTaskDescription = document.getElementById("modalTaskDescription");
-  const modalTaskDocumentation = document.getElementById("modalTaskDocumentation");
+  const modalTaskDocumentation = document.getElementById(
+    "modalTaskDocumentation"
+  );
   const modalVideoSection = document.getElementById("modalVideoSection");
   const modalTaskVideo = document.getElementById("modalTaskVideo");
   const modalImageSection = document.getElementById("modalImageSection");
   const modalTaskImage = document.getElementById("modalTaskImage");
   const modalMiniTaskSection = document.getElementById("modalMiniTaskSection");
-  const modalMiniTaskDescription = document.getElementById("modalMiniTaskDescription");
+  const modalMiniTaskDescription = document.getElementById(
+    "modalMiniTaskDescription"
+  );
   const miniTaskCompleteBtn = document.getElementById("miniTaskCompleteBtn");
   const modalCompleteTaskBtn = document.getElementById("modalCompleteTaskBtn");
 
@@ -203,7 +224,8 @@
     tasksList.innerHTML = ""; // Clear previous tasks
 
     if (allTasks.length === 0) {
-      tasksList.innerHTML = '<p style="color: #94a3b8;">No learning tasks available.</p>';
+      tasksList.innerHTML =
+        '<p style="color: #94a3b8;">No learning tasks available.</p>';
       return;
     }
 
@@ -211,11 +233,13 @@
       const isCompleted = userProgress.completedTasks.includes(task.id);
 
       const taskElement = document.createElement("div");
-      taskElement.className = `task-card ${isCompleted ? 'completed' : ''}`;
+      taskElement.className = `task-card ${isCompleted ? "completed" : ""}`;
       taskElement.innerHTML = `
         <div class="task-header">
           <h4>${task.title}</h4>
-          <span class="task-difficulty task-difficulty-${task.difficulty}">${task.difficulty}</span>
+          <span class="task-difficulty task-difficulty-${task.difficulty}">${
+        task.difficulty
+      }</span>
         </div>
         <p>${task.description}</p>
         <div class="task-footer">
@@ -232,13 +256,13 @@
   }
 
   function viewTask(taskId) {
-    currentTask = allTasks.find(task => task.id === taskId);
+    currentTask = allTasks.find((task) => task.id === taskId);
     if (!currentTask) return;
 
     modalTaskTitle.textContent = currentTask.title;
     modalTaskDescription.textContent = currentTask.description;
     modalTaskDocumentation.textContent = currentTask.documentation;
-    
+
     // Reset video and image sections
     modalVideoSection.style.display = "none";
     modalTaskVideo.src = "";
@@ -260,15 +284,18 @@
     taskDetailModal.style.display = "block";
   }
 
-  miniTaskCompleteBtn.addEventListener('click', () => {
+  miniTaskCompleteBtn.addEventListener("click", () => {
     if (currentTask) {
       modalCompleteTaskBtn.disabled = false; // Enable the final complete button
       miniTaskCompleteBtn.disabled = true; // Disable mini-task button after completion
-      showMessage("Mini-task completed! You can now complete the main task.", "success");
+      showMessage(
+        "Mini-task completed! You can now complete the main task.",
+        "success"
+      );
     }
   });
 
-  modalCompleteTaskBtn.addEventListener('click', async () => {
+  modalCompleteTaskBtn.addEventListener("click", async () => {
     if (currentTask) {
       await completeTask(currentTask.id);
       closeModal();
@@ -316,8 +343,8 @@
   }
 
   // Modal close functionality
-  closeButton.addEventListener('click', closeModal);
-  window.addEventListener('click', (event) => {
+  closeButton.addEventListener("click", closeModal);
+  window.addEventListener("click", (event) => {
     if (event.target === taskDetailModal) {
       closeModal();
     }
