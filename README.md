@@ -15,16 +15,19 @@ A comprehensive phishing awareness simulation tool built with Node.js, Express, 
 ## 🚀 Quick Start
 
 1. **Install Dependencies**
+
    ```bash
    npm install
    ```
 
 2. **Start the Application**
+
    ```bash
    npm start
    ```
-   
+
    For development with auto-reload:
+
    ```bash
    npm run dev
    ```
@@ -70,18 +73,22 @@ A comprehensive phishing awareness simulation tool built with Node.js, Express, 
 ## 🔧 Next Steps for Production
 
 1. **Database Integration**
+
    - Replace mock data with PostgreSQL/Sequelize
    - Set up proper data models and relationships
 
 2. **Authentication**
+
    - Implement Passport.js with bcrypt
    - Add user roles and permissions
 
 3. **Email Service**
+
    - Integrate SendGrid/Mailgun for email delivery
    - Add email queue with Bull/Redis
 
 4. **Security**
+
    - Add CSRF protection
    - Implement rate limiting
    - Add input validation and sanitization
