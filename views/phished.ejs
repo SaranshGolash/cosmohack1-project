@@ -3,16 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Security Awareness - SecureGuard</title>
+    <title>Security Awareness - PhishGuard</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/enhanced.css" />
   </head>
   <body>
     <div class="login-container">
-      <div
-        class="login-card sparkle"
-        style="max-width: 700px; border-top: 4px solid #f43f5e"
-      >
+      <div class="login-card sparkle" style="max-width: 700px">
         <div style="text-align: center; margin-bottom: 3rem">
           <div
             style="
@@ -25,55 +21,51 @@
           </div>
           <h1
             style="
-              background: linear-gradient(135deg, #f43f5e, #fb7185);
+              background: linear-gradient(135deg, #ef4444, #f87171);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               background-clip: text;
               margin-bottom: 1rem;
               font-size: 3rem;
-              letter-spacing: -1px;
             "
           >
             You've Been Phished!
           </h1>
-          <p style="color: #94a3b8; font-size: 1.2rem; line-height: 1.6">
+          <p
+            style="
+              color: rgba(255, 255, 255, 0.8);
+              font-size: 1.2rem;
+              line-height: 1.6;
+            "
+          >
             This was a simulated phishing attack to test your security
             awareness.
           </p>
           <div
             style="
-              background: rgba(244, 63, 94, 0.1);
-              border: 1px solid rgba(244, 63, 94, 0.3);
+              background: rgba(239, 68, 68, 0.1);
+              border: 1px solid rgba(239, 68, 68, 0.3);
               border-radius: 12px;
               padding: 1rem;
               margin-top: 1.5rem;
-              box-shadow: 0 0 15px rgba(244, 63, 94, 0.1);
             "
           >
-            <p style="color: #fda4af; font-weight: 600; margin: 0">
+            <p style="color: #fca5a5; font-weight: 600">
               ⚠️ Don't worry - this was just a test!
             </p>
           </div>
         </div>
 
-        <div
-          class="glass-card"
-          style="margin: 2rem 0; border-left: 4px solid #f43f5e"
-        >
+        <div class="glass-card sparkle" style="margin: 2rem 0">
           <div
             style="display: flex; align-items: center; margin-bottom: 1.5rem"
           >
             <div style="font-size: 1.5rem; margin-right: 1rem">🚨</div>
-            <h3 style="color: #fda4af; margin: 0">Red Flags You Missed:</h3>
+            <h3 style="color: var(--light-purple); margin: 0">
+              Red Flags You Missed:
+            </h3>
           </div>
-          <ul
-            style="
-              color: #cbd5e1;
-              line-height: 1.8;
-              list-style-type: square;
-              padding-left: 20px;
-            "
-          >
+          <ul style="color: #ccc; line-height: 1.6">
             <li>Suspicious sender email address</li>
             <li>Urgent or threatening language</li>
             <li>Request for sensitive information</li>
@@ -82,24 +74,16 @@
           </ul>
         </div>
 
-        <div
-          class="glass-card"
-          style="margin: 2rem 0; border-left: 4px solid #10b981"
-        >
+        <div class="glass-card sparkle" style="margin: 2rem 0">
           <div
             style="display: flex; align-items: center; margin-bottom: 1.5rem"
           >
             <div style="font-size: 1.5rem; margin-right: 1rem">✅</div>
-            <h3 style="color: #6ee7b7; margin: 0">What You Should Do:</h3>
+            <h3 style="color: var(--light-purple); margin: 0">
+              What You Should Do:
+            </h3>
           </div>
-          <ul
-            style="
-              color: #cbd5e1;
-              line-height: 1.8;
-              list-style-type: square;
-              padding-left: 20px;
-            "
-          >
+          <ul style="color: #ccc; line-height: 1.6">
             <li>Always verify the sender's identity</li>
             <li>Check URLs before clicking</li>
             <li>Never provide sensitive information via email</li>
@@ -108,25 +92,10 @@
           </ul>
         </div>
 
-        <div
-          style="
-            text-align: center;
-            margin-top: 3rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-          "
-        >
-          <a
-            href="#"
-            class="btn btn-primary pulse"
-            style="
-              background: linear-gradient(135deg, #f43f5e, #e11d48);
-              box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4);
-            "
+        <div style="text-align: center; margin-top: 3rem">
+          <a href="#" class="btn btn-primary pulse" style="margin-right: 1rem"
+            >🎓 Security Training</a
           >
-            🎓 Security Training
-          </a>
           <a href="#" class="btn btn-secondary">📄 Company Policy</a>
         </div>
 
@@ -135,16 +104,16 @@
             text-align: center;
             margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--glass-border);
           "
         >
-          <p style="color: #64748b; font-size: 0.9rem">
+          <p style="color: #aaa; font-size: 0.9rem">
             This simulation helps improve our organization's security
             posture.<br />
             Questions? Contact IT Security at
             <a
               href="mailto:security@company.com"
-              style="color: var(--primary-emerald); text-decoration: none"
+              style="color: var(--light-purple)"
               >security@company.com</a
             >
           </p>

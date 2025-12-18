@@ -4,28 +4,16 @@ include('partials/sidebar', { page: 'breach-search' }) %>
 <div class="main-content">
   <div class="container">
     <div class="fade-in-left">
-      <h1>
-        <span style="-webkit-text-fill-color: initial; background: none"
-          >📧</span
-        >
-        <span
-          style="
-            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          "
-          >Email Verification & Breach Check</span
-        >
+      <h1 class="text-gradient-emerald">
+        📧 Email Verification & Breach Check
       </h1>
-      <p style="color: #94a3b8; margin-top: 0.5rem">
+      <p style="color: #64748b; margin-top: 0.5rem">
         Validate email addresses and check for involvement in data leaks.
       </p>
     </div>
 
-    <div
-      class="glass-card fade-in-up"
-      style="margin-top: 2rem; border-left: 4px solid var(--accent-gold)"
-    >
+    <!-- 1. SEARCH INPUT -->
+    <div class="glass-card card-emerald fade-in-up" style="margin-top: 2rem">
       <div id="scanContainer">
         <div class="form-group">
           <label class="form-label" for="emailInput">Enter Email Address</label>
@@ -43,6 +31,7 @@ include('partials/sidebar', { page: 'breach-search' }) %>
       </div>
     </div>
 
+    <!-- 2. ERROR BOX -->
     <div
       id="errorBox"
       style="
@@ -57,7 +46,9 @@ include('partials/sidebar', { page: 'breach-search' }) %>
       "
     ></div>
 
+    <!-- 3. RESULTS AREA -->
     <div id="visualResults" style="display: none; margin-top: 2rem">
+      <!-- A. HEADLINE CARD -->
       <div
         class="glass-card"
         style="
@@ -70,11 +61,7 @@ include('partials/sidebar', { page: 'breach-search' }) %>
       >
         <div
           id="validityIcon"
-          style="
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
-          "
+          style="font-size: 4rem; margin-bottom: 1rem"
         ></div>
         <h2
           id="validityTitle"
@@ -82,6 +69,7 @@ include('partials/sidebar', { page: 'breach-search' }) %>
         ></h2>
         <p id="validityDesc" style="color: #94a3b8; font-size: 1.1rem"></p>
 
+        <!-- Fraud Score Bar -->
         <div
           style="
             margin-top: 1.5rem;
@@ -118,13 +106,13 @@ include('partials/sidebar', { page: 'breach-search' }) %>
                 height: 100%;
                 background: #10b981;
                 transition: width 1s ease;
-                box-shadow: 0 0 10px currentColor;
               "
             ></div>
           </div>
         </div>
       </div>
 
+      <!-- B. ALERTS CONTAINER (Leaks/Disposable) -->
       <div id="alertsContainer" style="display: none; margin-bottom: 2rem">
         <div
           id="alertBadges"
@@ -137,6 +125,7 @@ include('partials/sidebar', { page: 'breach-search' }) %>
         ></div>
       </div>
 
+      <!-- C. DETAILS GRID -->
       <div
         style="
           display: grid;
@@ -144,6 +133,7 @@ include('partials/sidebar', { page: 'breach-search' }) %>
           gap: 1.5rem;
         "
       >
+        <!-- Deliverability Info -->
         <div class="glass-card">
           <h3
             style="
@@ -185,6 +175,7 @@ include('partials/sidebar', { page: 'breach-search' }) %>
           </ul>
         </div>
 
+        <!-- Domain Intelligence -->
         <div class="glass-card">
           <h3
             style="
@@ -232,6 +223,8 @@ include('partials/sidebar', { page: 'breach-search' }) %>
 
   async function verifyEmail() {
     console.log("👉 Button Clicked! verifyEmail() running.");
+
+    // 1. Get Elements
     const emailInput = document.getElementById("emailInput").value;
     const scanBtn = document.getElementById("scanBtn");
     const resultsDiv = document.getElementById("visualResults");
@@ -239,6 +232,7 @@ include('partials/sidebar', { page: 'breach-search' }) %>
     const alertsContainer = document.getElementById("alertsContainer");
     const alertBadges = document.getElementById("alertBadges");
 
+    // 2. Reset UI
     resultsDiv.style.display = "none";
     errorBox.style.display = "none";
     alertsContainer.style.display = "none";
@@ -249,12 +243,14 @@ include('partials/sidebar', { page: 'breach-search' }) %>
 
     try {
       console.log("👉 Sending Request for:", emailInput);
+
       const response = await fetch("/api/breach-search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: emailInput }),
       });
 
+      // Check for Session Timeout
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("text/html")) {
         throw new Error("Session Expired. Please refresh the page.");
@@ -262,6 +258,8 @@ include('partials/sidebar', { page: 'breach-search' }) %>
 
       const data = await response.json();
       console.log("👉 API Data:", data);
+
+      // --- DEMO OVERRIDES (For showing different states easily) ---
 
       if (emailInput === "valid@test.com") {
         data.valid = true;
@@ -284,36 +282,45 @@ include('partials/sidebar', { page: 'breach-search' }) %>
       }
       resultsDiv.style.display = "block";
 
+      // 1. Headline Validity Logic
       const card = document.getElementById("validityCard");
       const icon = document.getElementById("validityIcon");
       const title = document.getElementById("validityTitle");
       const desc = document.getElementById("validityDesc");
       const bar = document.getElementById("fraudBar");
+
       const score = Number(data.fraud_score) || 0;
 
       document.getElementById("scoreVal").innerText = score;
       bar.style.width = (score === 0 ? 5 : score) + "%";
 
       const isValid = data.valid === true;
+
+      // Define Risk Factors
       const isLeaked = data.leaked === true;
       const isDisposable = data.disposable === true;
       const isHighScore = score >= 85;
       const hasAbuse = data.recent_abuse === true || data.honeypot === true;
+
+      // A leaked email is usually still valid. We just show the badge.
       const isMainVerdictRisky = isDisposable || isHighScore || hasAbuse;
 
       if (!isValid) {
+        // CASE 1: INVALID
         icon.innerText = "⛔";
         title.innerText = "INVALID ADDRESS";
         desc.innerText =
           "This email address does not exist or cannot be delivered to.";
-        title.style.color = "#ef4444";
+        title.style.color = "#ef4444"; // Red
         card.style.borderLeftColor = "#ef4444";
         bar.style.backgroundColor = "#ef4444";
       } else if (isMainVerdictRisky) {
+        // CASE 2: VALID BUT RISKY (Spammy/Disposable/High Fraud Score)
         icon.innerText = "⚠️";
-        title.style.color = "#f59e0b";
+        title.style.color = "#f59e0b"; // Orange
         card.style.borderLeftColor = "#f59e0b";
         bar.style.backgroundColor = "#f59e0b";
+
         if (isDisposable) {
           title.innerText = "DISPOSABLE EMAIL";
           desc.innerText = "Temporary email address detected. Do not trust.";
@@ -323,21 +330,25 @@ include('partials/sidebar', { page: 'breach-search' }) %>
             "Address exists but has a high fraud score or abuse history.";
         }
       } else {
+        // CASE 3: VALID AND SAFE (Matches most personal emails, even if leaked)
         icon.innerText = "✅";
         title.innerText = "VALID (VERIFIED)";
         desc.innerText = "This address exists and has a healthy reputation.";
-        title.style.color = "#10b981";
+        title.style.color = "#10b981"; // Green
         card.style.borderLeftColor = "#10b981";
         bar.style.backgroundColor = "#10b981";
       }
 
+      // 2. Create Alert Badges (Leaked, Disposable, High Fraud)
       let alertsFound = 0;
+
       const addBadge = (text, colorClass) => {
         alertsFound++;
         const span = document.createElement("span");
         span.innerText = text;
         span.style.cssText =
           "padding: 8px 16px; border-radius: 8px; font-weight: bold; border: 1px solid;";
+
         if (colorClass === "red") {
           span.style.background = "rgba(239, 68, 68, 0.2)";
           span.style.color = "#fca5a5";
@@ -360,9 +371,11 @@ include('partials/sidebar', { page: 'breach-search' }) %>
         alertsContainer.style.display = "block";
       }
 
+      // 3. Detailed Data Table
       const setBool = (id, val, goodIsGreen = true) => {
         const el = document.getElementById(id);
         el.innerText = val ? "Yes" : "No";
+
         if (val) {
           el.style.color = goodIsGreen ? "#10b981" : "#ef4444";
         } else {
@@ -370,11 +383,11 @@ include('partials/sidebar', { page: 'breach-search' }) %>
         }
       };
 
-      setBool("resValid", data.valid, true);
-      setBool("resDisposable", data.disposable, false);
-      setBool("resAbuse", data.recent_abuse, false);
-      setBool("resHoneypot", data.honeypot, false);
-      setBool("resLeaked", data.leaked, false);
+      setBool("resValid", data.valid, true); // Valid = Green
+      setBool("resDisposable", data.disposable, false); // Disposable = Red
+      setBool("resAbuse", data.recent_abuse, false); // Abuse = Red
+      setBool("resHoneypot", data.honeypot, false); // Honeypot = Red
+      setBool("resLeaked", data.leaked, false); // Leaked = Red
 
       document.getElementById("resDeliverability").innerText = safeText(
         data.deliverability

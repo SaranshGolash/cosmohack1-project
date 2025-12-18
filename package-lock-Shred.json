@@ -557,9 +557,7 @@
       "hasInstallScript": true,
       "license": "MIT",
       "optional": true,
-      "os": [
-        "darwin"
-      ],
+      "os": ["darwin"],
       "engines": {
         "node": "^8.16.0 || ^10.6.0 || >=11.0.0"
       }
@@ -708,9 +706,7 @@
       "version": "1.13.4",
       "resolved": "https://registry.npmjs.org/inflection/-/inflection-1.13.4.tgz",
       "integrity": "sha512-6I/HUDeYFfuNCVS3td055BaXBwKYuzw7K3ExVMStBowKo9oOAMJIXIHvdyR3iboTCp1b+1i5DSkIZTcwIktuDw==",
-      "engines": [
-        "node >= 0.4.0"
-      ],
+      "engines": ["node >= 0.4.0"],
       "license": "MIT"
     },
     "node_modules/inherits": {

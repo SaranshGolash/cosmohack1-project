@@ -4,60 +4,37 @@ include('partials/sidebar', { page: 'file-scanner' }) %>
 <div class="main-content">
   <div class="container">
     <div class="fade-in-left">
-      <h1
-        class="text-gradient-emerald"
-        style="
-          background: var(--gradient-primary);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        "
-      >
-        📁 File Malware Scanner
-      </h1>
-      <p style="color: #94a3b8; margin-top: 0.5rem">
-        Upload files to scan for malware, viruses, and threats.
+      <h1 class="text-gradient-emerald">📁 File Malware Scanner</h1>
+      <p style="color: #64748b; margin-top: 0.5rem">
+        Upload files to scan for malware, viruses, and threats
       </p>
     </div>
 
-    <div
-      class="glass-card fade-in-up"
-      style="margin-top: 2rem; border-left: 4px solid var(--primary-emerald)"
-    >
+    <div class="glass-card card-emerald fade-in-up" style="margin-top: 2rem">
       <form id="fileScanForm" enctype="multipart/form-data">
         <div class="form-group">
           <label class="form-label" for="file">Upload File (Max 10MB)</label>
-          <div style="position: relative">
-            <input
-              type="file"
-              id="file"
-              name="file"
-              class="form-input"
-              required
-              style="
-                padding: 1rem;
-                border: 2px dashed rgba(139, 92, 246, 0.3);
-                background: rgba(0, 0, 0, 0.2);
-              "
-            />
-          </div>
+          <input
+            type="file"
+            id="file"
+            name="file"
+            class="form-input"
+            required
+            style="padding: 1rem"
+          />
           <p style="color: #64748b; font-size: 0.85rem; margin-top: 0.5rem">
             Supported: .exe, .pdf, .doc, .zip, .js, .html, etc.
           </p>
         </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          style="box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4)"
-        >
-          Scan File
-        </button>
+        <button type="submit" class="btn btn-primary">Scan File</button>
       </form>
     </div>
 
     <div
       id="scanResults"
-      style="display: none; margin-top: 2rem"
+      style="display: none"
       class="glass-card fade-in-up"
+      style="margin-top: 2rem"
     >
       <h3 style="color: var(--light-emerald); margin-bottom: 1.5rem">
         Scan Results
@@ -76,8 +53,7 @@ include('partials/sidebar', { page: 'file-scanner' }) %>
       const resultsDiv = document.getElementById("scanResults");
       const resultsContent = document.getElementById("resultsContent");
 
-      resultsContent.innerHTML =
-        '<div class="loading" style="color: var(--primary-emerald);">Scanning file...</div>';
+      resultsContent.innerHTML = '<div class="loading">Scanning file...</div>';
       resultsDiv.style.display = "block";
 
       try {
