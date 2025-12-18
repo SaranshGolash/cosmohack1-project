@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const https = require("https");
 require("dotenv").config();
-const User = require("./Front-end Files/models/User");
-const LearningTask = require("./Front-end Files/models/LearningTask");
+const User = require("./models/User");
+const LearningTask = require("./models/LearningTask");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
