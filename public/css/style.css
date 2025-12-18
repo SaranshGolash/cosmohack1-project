@@ -156,13 +156,13 @@ body::before {
   display: flex;
   list-style: none;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .nav-links a {
   color: #cbd5e1;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: 500;
@@ -597,16 +597,28 @@ body::before {
   background: var(--primary-emerald);
 }
 
-.sidebar-toggle.active span:nth-child(1) {
+.sidebar-toggle span:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
 }
 
-.sidebar-toggle.active span:nth-child(2) {
+.sidebar-toggle span:nth-child(2) {
   opacity: 0;
 }
 
-.sidebar-toggle.active span:nth-child(3) {
+.sidebar-toggle span:nth-child(3) {
   transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.sidebar-toggle.active span:nth-child(1) {
+  transform: rotate(0deg) translate(0,0);
+}
+
+.sidebar-toggle.active span:nth-child(2) {
+  opacity: 1;
+}
+
+.sidebar-toggle.active span:nth-child(3) {
+  transform: rotate(0deg) translate(0,0);
 }
 
 /* Sidebar */
@@ -619,14 +631,16 @@ body::before {
   );
   backdrop-filter: blur(20px);
   border-right: 1px solid rgba(51, 65, 85, 0.3);
-  height: calc(100vh - 80px);
+  height: calc(100vh - 70px);
+  overflow-y: auto;
   position: fixed;
   left: 0;
-  top: 80px;
+  top: 70px;
   padding: 2rem 0;
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
   z-index: 999;
+  
 }
 
 .sidebar.collapsed {
@@ -974,7 +988,8 @@ h3 {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1059,4 +1074,28 @@ h3,
 
 .slide-in {
   animation: slideIn 0.5s ease-out;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* ensures table is wide enough for all columns */
+}
+
+
+
+
+
+.task-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.task-table button {
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.btn-sm {
+  width: 8rem;
 }

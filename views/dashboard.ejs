@@ -315,17 +315,7 @@ include('partials/sidebar', { page: 'dashboard' }) %>
 
 <script>
   // Sidebar Toggle
-  const toggleBtn = document.getElementById("sidebarToggle");
-  const sidebar = document.querySelector(".sidebar");
-  const mainContent = document.querySelector(".main-content");
-
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", function () {
-      this.classList.toggle("active");
-      if (sidebar) sidebar.classList.toggle("collapsed");
-      if (mainContent) mainContent.classList.toggle("expanded");
-    });
-  }
+ 
 
   // Chart.js configuration
   setTimeout(() => {

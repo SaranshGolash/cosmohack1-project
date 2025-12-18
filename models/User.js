@@ -44,6 +44,7 @@ class User {
             completedTasks: [],
             createdAt: new Date(),
           },
+         
         ];
       }
       console.error("Error loading users from file:", error);

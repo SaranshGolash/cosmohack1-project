@@ -61,34 +61,40 @@
     </div>
 
     <!-- Learning Tasks Section -->
-    <div class="glass-card fade-in-up" style="margin-top: 2rem">
-      <h3>Available Learning Tasks</h3>
-      <div id="tasksList" style="margin-top: 1rem"></div>
-    </div>
+  <div class="glass-card fade-in-up" style="margin-top: 2rem">
+  <h3>Available Learning Tasks</h3>
 
-    <!-- Error and Success Messages -->
-    <div
-      id="messageBox"
-      style="
-        display: none;
-        margin-top: 1rem;
-        padding: 1rem;
-        border-radius: 8px;
-        text-align: center;
-      "
-    ></div>
+  <!-- Task Table -->
+  <div class="table-container" style="margin-top: 1rem; overflow-x:auto;">
+    <table class="table task-table">
+      <thead>
+        <tr>
+          <th>Task Title</th>
+          <th>Description</th>
+          <th>Resources</th> <!-- Merged column -->
+          <th>Mini-Task</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tasksList">
+        <!-- JS will populate rows here -->
+      </tbody>
+    </table>
   </div>
+
+  <!-- Error and Success Messages -->
+  <div
+    id="messageBox"
+    style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; text-align: center;"
+  ></div>
 </div>
 
-<!-- Task Detail Modal -->
+<!-- Task Detail Modal remains same -->
 <div id="taskDetailModal" class="modal">
   <div class="modal-content glass-card">
     <span class="close-button">&times;</span>
     <h3 id="modalTaskTitle"></h3>
-    <p
-      id="modalTaskDescription"
-      style="color: #94a3b8; margin-bottom: 1rem"
-    ></p>
+    <p id="modalTaskDescription" style="color: #94a3b8; margin-bottom: 1rem"></p>
 
     <div class="modal-section">
       <h4>Documentation</h4>
@@ -108,16 +114,11 @@
         id="modalTaskImage"
         src=""
         alt="Task Image"
-        style="
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-          margin-top: 0.5rem;
-        "
+        style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 0.5rem;"
       />
     </div>
 
-    <div class="modal-section" id="modalMiniTaskSection">
+      <div class="modal-section" id="modalMiniTaskSection">
       <h4>Mini-Task</h4>
       <p
         id="modalMiniTaskDescription"
@@ -220,40 +221,40 @@
     displayTasks(); // Re-display tasks to update completion status
   }
 
-  function displayTasks() {
+ function displayTasks() {
     tasksList.innerHTML = ""; // Clear previous tasks
 
     if (allTasks.length === 0) {
       tasksList.innerHTML =
-        '<p style="color: #94a3b8;">No learning tasks available.</p>';
+        '<tr><td colspan="5" style="text-align:center; color:#94a3b8;">No learning tasks available.</td></tr>';
       return;
     }
 
     allTasks.forEach((task) => {
       const isCompleted = userProgress.completedTasks.includes(task.id);
 
-      const taskElement = document.createElement("div");
-      taskElement.className = `task-card ${isCompleted ? "completed" : ""}`;
-      taskElement.innerHTML = `
-        <div class="task-header">
-          <h4>${task.title}</h4>
-          <span class="task-difficulty task-difficulty-${task.difficulty}">${
-        task.difficulty
-      }</span>
-        </div>
-        <p>${task.description}</p>
-        <div class="task-footer">
-          <span class="task-xp">+${task.experienceReward} XP</span>
-          ${
-            isCompleted
-              ? '<span class="task-completed-badge">✅ Completed</span>'
-              : `<button class="btn btn-sm btn-secondary" onclick="viewTask('${task.id}')">View Learning</button>`
-          }
-        </div>
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${task.title}</td>
+        <td>${task.description}</td>
+        <td>
+          ${task.documentation ? `<a href="${task.documentation}" target="_blank" class="btn btn-sm btn-secondary" style="display:block; margin-bottom:0.3rem; font-size: 0.75rem;height:2rem; display:flex; align-items:center; justify-content: center; ">View Doc</a>` : ''}
+          ${task.videoUrl ? `<button class="btn btn-sm btn-secondary" style="display:block; margin-bottom:0.3rem; font-size: 0.75rem; height:2rem; display:flex; align-items:center; justify-content: center;" onclick="viewTask('${task.id}')">Watch Video</button>` : ''}
+          ${task.imageUrl ? `<button class="btn btn-sm btn-secondary" style="display:block; font-size: 0.75rem; height:2rem; display:flex; align-items:center; justify-content: center;" onclick="viewTask('${task.id}')">View Image</button>` : ''}
+        </td>
+        <td>${task.miniTaskDescription || '-'}</td>
+        <td>
+          ${isCompleted 
+            ? '<span class="task-completed-badge">✅ Completed</span>' 
+            : `<button class="btn  btn-primary" onclick="viewTask('${task.id}')">View Learning</button>`}
+        </td>
       `;
-      tasksList.appendChild(taskElement);
+
+      tasksList.appendChild(row);
     });
   }
+
 
   function viewTask(taskId) {
     currentTask = allTasks.find((task) => task.id === taskId);

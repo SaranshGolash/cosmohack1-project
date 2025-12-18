@@ -99,6 +99,25 @@ function initSidebarToggle() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  initSidebarToggle();
+});
+
+function initSidebarToggle() {
+  const toggleBtn = document.getElementById("sidebarToggle");
+  const sidebar = document.querySelector(".sidebar");
+  const mainContent = document.querySelector(".main-content");
+
+  if (!toggleBtn || !sidebar) return;
+
+  toggleBtn.addEventListener("click", () => {
+    toggleBtn.classList.toggle("active");
+    sidebar.classList.toggle("collapsed");
+    if (mainContent) mainContent.classList.toggle("expanded");
+  });
+}
+
+
 // Initialize tooltips and other UI enhancements
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize sidebar toggle
